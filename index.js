@@ -14,6 +14,13 @@ app.use(express.json());
 app.use(cors());
 
 // Routes
+app.get("/api/notes", (request, response, next) => {
+  Note.find({})
+    .then((notes) => {
+      response.json(notes);
+    })
+    .catch((error) => next(error));
+});
 
 app.get("/api/notes/:id", (request, response, next) => {
   Note.findById(request.params.id)
